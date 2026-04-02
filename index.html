@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="theme-midnight">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>離職倒數計時器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="theme-switcher">
+        <div class="theme-btn active" data-theme="midnight" title="午夜紫"></div>
+        <div class="theme-btn" data-theme="sunset" title="日落橘"></div>
+        <div class="theme-btn" data-theme="ocean" title="海洋藍"></div>
+        <div class="theme-btn" data-theme="forest" title="森林綠"></div>
+    </div>
+
+    <div class="container" id="app">
+        <h1>離職倒數計時器</h1>
+        <div class="target-date">目標日：2026 年 7 月 31 日</div>
+
+        <div class="countdown">
+            <div class="time-block">
+                <div class="time-value" id="days">--</div>
+                <div class="time-label">天</div>
+            </div>
+            <div class="time-block">
+                <div class="time-value" id="hours">--</div>
+                <div class="time-label">時</div>
+            </div>
+            <div class="time-block">
+                <div class="time-value" id="minutes">--</div>
+                <div class="time-label">分</div>
+            </div>
+            <div class="time-block">
+                <div class="time-value" id="seconds">--</div>
+                <div class="time-label">秒</div>
+            </div>
+        </div>
+
+        <!-- Quick stats -->
+        <div class="stats-row">
+            <div class="stat-chip">剩餘上班日 <strong id="workDays">--</strong></div>
+            <div class="stat-chip">剩餘發薪 <strong id="paydays">--</strong> 次</div>
+            <div class="stat-chip">已撐過 <strong id="survivedDays">--</strong> 天</div>
+        </div>
+
+        <!-- Progress bar with milestones -->
+        <div class="progress-section">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div class="milestones" id="milestones"></div>
+            <div class="progress-text">自由進度 <span id="progressText">0%</span></div>
+        </div>
+
+        <!-- Daily quote -->
+        <div class="daily-quote">
+            <div class="daily-quote-label">今日一句</div>
+            <div class="quote-text" id="quoteText"></div>
+            <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+
+        <!-- Two-column sections -->
+        <div class="sections-grid">
+            <!-- Check-in & Mood -->
+            <div class="section-card">
+                <h3>每日打卡</h3>
+                <button class="checkin-btn" id="checkinBtn" onclick="doCheckin()">打卡！又撐過一天</button>
+                <div class="checkin-info">
+                    <span class="streak-badge" id="streakBadge">0 天連續</span>
+                    <span style="margin-left: 0.5rem;">總打卡 <strong id="totalCheckins">0</strong> 天</span>
+                </div>
+                <div class="checkin-calendar" id="checkinCalendar"></div>
+
+                <h3 style="margin-top: 1.2rem;">今天心情</h3>
+                <div class="mood-row" id="moodRow">
+                    <button class="mood-btn" data-mood="great" onclick="setMood('great')">😆</button>
+                    <button class="mood-btn" data-mood="good" onclick="setMood('good')">😊</button>
+                    <button class="mood-btn" data-mood="okay" onclick="setMood('okay')">😐</button>
+                    <button class="mood-btn" data-mood="bad" onclick="setMood('bad')">😩</button>
+                    <button class="mood-btn" data-mood="angry" onclick="setMood('angry')">🤬</button>
+                </div>
+                <div class="mood-label" id="moodLabel"></div>
+                <div class="mood-history" id="moodHistory"></div>
+            </div>
+
+            <!-- Bucket list -->
+            <div class="section-card">
+                <h3>離職後想做的事</h3>
+                <div class="bucket-input-row">
+                    <input class="bucket-input" id="bucketInput" placeholder="加入新願望..." maxlength="50" onkeydown="if(event.key==='Enter')addBucket()">
+                    <button class="bucket-add-btn" onclick="addBucket()">+</button>
+                </div>
+                <ul class="bucket-list" id="bucketList"></ul>
+            </div>
+        </div>
+
+        <!-- Fun stats -->
+        <div class="section-card" style="margin-top: 1.5rem;">
+            <h3>趣味統計</h3>
+            <div class="fun-stats" id="funStats"></div>
+        </div>
+
+        <div class="message" id="message"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
